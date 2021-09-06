@@ -11,7 +11,7 @@ const Plugin = {
     const plugin = new PluginCore(Vue, options)
 
     Object.defineProperty(Vue.prototype, '$modal', {
-      get: function() {
+      get: function () {
         /**
          * The "this" scope is the scope of the component that calls this.$modal
          */
@@ -23,7 +23,7 @@ const Plugin = {
           const root = caller.$root
 
           if (!plugin.context.root) {
-            plugin.setDynamicModalContainer(root)
+            plugin.setDynamicModalContainer(root, options.selector)
           }
         }
 
@@ -40,8 +40,8 @@ const Plugin = {
      * Registration of <Dialog/> component
      */
     if (options.dialog) {
-      const componentName = options.dialogComponentName || 'VDialog';
-      Vue.component(componentName, Dialog);
+      const componentName = options.dialogComponentName || 'VDialog'
+      Vue.component(componentName, Dialog)
     }
   }
 }

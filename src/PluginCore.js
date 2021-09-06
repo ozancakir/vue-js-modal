@@ -36,14 +36,14 @@ const PluginCore = (Vue, options = {}) => {
    *
    * @param {Vue} parent
    */
-  const setDynamicModalContainer = parent => {
+  const setDynamicModalContainer = (parent, selector) => {
     context.root = parent
 
-    const element = createDivInBody()
+    const element = createDivInBody(selector)
 
     new Vue({
       parent,
-      render: h => h(ModalsContainer)
+      render: (h) => h(ModalsContainer)
     }).$mount(element)
   }
 
