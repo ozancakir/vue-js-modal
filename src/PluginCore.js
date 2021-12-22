@@ -43,7 +43,7 @@ const PluginCore = (Vue, options = {}) => {
 
     new Vue({
       parent,
-      render: (h) => h(ModalsContainer)
+      render: h => h(ModalsContainer)
     }).$mount(element)
   }
 
@@ -69,8 +69,15 @@ const PluginCore = (Vue, options = {}) => {
     subscription.$emit('toggle', name, false, params)
   }
 
+  const count = () => {
+    return context.root?.__modalContainer?.count() ?? 0
+  }
+
   const hideAll = () => {
     subscription.$emit('hide-all')
+  }
+  const modals = () => {
+    return context.root?.__modalContainer?.modals
   }
 
   const toggle = (name, params) => {
@@ -84,6 +91,8 @@ const PluginCore = (Vue, options = {}) => {
     hide,
     hideAll,
     toggle,
+    modals,
+    count,
     setDynamicModalContainer
   }
 }

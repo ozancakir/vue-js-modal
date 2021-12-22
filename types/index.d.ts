@@ -20,6 +20,8 @@ declare interface VModal {
   ): void
   hide(name: string, params?: object): void
   hideAll(): void
+  count(): number
+  modals(): object[]
   toggle(name: string, params?: object): void
 }
 

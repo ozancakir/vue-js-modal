@@ -17,51 +17,54 @@
   </div>
 </template>
 <script>
-import { generateId } from '../utils'
+import { generateId } from "../utils";
 
-const PREFIX = 'dynamic_modal_'
+const PREFIX = "dynamic_modal_";
 
 export default {
   data() {
     return {
-      modals: []
-    }
+      modals: [],
+    };
   },
   created() {
     /**
      * Register ModalContainer so that it was availiable inside the plugin
      */
-    this.$root.__modalContainer = this
+    this.$root.__modalContainer = this;
   },
   mounted() {
-    this.$modal.subscription.$on('hide-all', () => {
-      this.modals = []
-    })
+    this.$modal.subscription.$on("hide-all", () => {
+      this.modals = [];
+    });
   },
   methods: {
     add(component, componentAttrs = {}, modalAttrs = {}, modalListeners = {}) {
-      const id = generateId()
-      const name = modalAttrs.name || PREFIX + id
+      const id = generateId();
+      const name = modalAttrs.name || PREFIX + id;
 
       this.modals.push({
         id,
         modalAttrs: { ...modalAttrs, name },
         modalListeners,
         component,
-        componentAttrs
-      })
+        componentAttrs,
+      });
 
       this.$nextTick(() => {
-        this.$modal.show(name)
-      })
+        this.$modal.show(name);
+      });
+    },
+    count() {
+      return this.modals.length ?? 0;
     },
     remove(id) {
-      const index = this.modals.findIndex(v => v.id === id)
+      const index = this.modals.findIndex((v) => v.id === id);
 
       if (index !== -1) {
-        this.modals.splice(index, 1)
+        this.modals.splice(index, 1);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
